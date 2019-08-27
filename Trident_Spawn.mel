@@ -1,0 +1,243 @@
+polyCylinder -r .3 -h 10 -sx 12 -sy 5 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1 -name "core";
+move -r 0 5.327933 0 "core";
+
+select -r core.vtx[48:59];
+ move -r 0 0.92607 0; 
+ scale -r -p 0cm 9.254003cm 0cm 0.695944 0.695944 0.695944;
+ rotate -r -p 0cm 9.254003cm 0cm -os -fo 0 0 -33.73282;
+
+select -r core.vtx[0:11] core.vtx[72] ;
+ scale -r -p 0cm 0.327933cm 0cm 0.295014 0.295014 0.295014 ;
+ 
+select -r core.vtx[36:47] ;
+ scale -r -p 0cm 6.327933cm 0cm 0.663074 0.663074 0.663074 ;
+ 
+select -r core.vtx[36:47] ;
+ scale -r -p 0cm 6.327933cm 0cm 0.663074 0.663074 0.663074 ;
+
+polyCube -w 1 -h 1 -d 1 -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1 -name "CrossGuard";
+ move -r 0 10.077034 0 ;
+ scale -r 3.820939 1 1 ;
+ scale -r 1 0.224623 1 ;
+ move -r 0 0.136871 0 ;
+ polyBevel3 -fraction 0.5 -offsetAsFraction 1 -autoFit 1 -depth 1 -mitering 0 -miterAlong 0 -chamfer 1 -segments 1 -worldSpace 1 -smoothingAngle 30 -subdivideNgons 1 -mergeVertices 1 -mergeVertexTolerance 0.0001 -miteringAngle 180 -angleTolerance 180 -ch 1 CrossGuard;
+ select -r CrossGuard ;
+ scale -r 0.494493 1 1 ;
+ scale -r 1 1.27644 1 ;
+ 
+polyCube -w 1 -h 1 -d 1 -sx 6 -sy 2 -sz 1 -ax 0 1 0 -cuv 4 -ch 1;
+    select -r pCube1 ;
+    move -r 0 10.811127 0 ;
+    
+select -r pCube1.vtx[0:6] pCube1.vtx[35:41] ;
+    scale -r -p 2.98023e-08cm 10.311127cm 0cm 0.644847 0.644847 0.644847 ;
+    
+// polyExtrudeFacet command -constructionHistory 1 -keepFacesTogether 1 -pvx -1.5559 -pvy 0 -pvz 0 -divisions 1(unless you want more) -twist 0(unless you want a twist) -taper 1 -thickness 0 -smoothingAngle 30 core.f[18]
+//And then a line with setAttr “polyExtrudeFace1.localTranslate -type double3 1.5559 0 0 core.f[18]
+    
+//select -r pCube1.f[37] ;
+//polyExtrudeFacet -constructionHistory 1 -keepFacesTogether false -pvx -1.5559 -pvy 0 -pvz 0 -divisions 1 -twist 0 -taper 1 -thickness 0 -smoothingAngle 30 pCube1.f[37];
+    //setAttr "polyExtrudeFace1.localTranslate -type double3 1.5559 0 0 pCube.f[37];
+
+//Move verts for section above core handle.    
+select -r pCube1 ;
+    select -r pCube1.vtx[14] pCube1.vtx[21] ;
+    move -r -0.945523 0.3121 0 ;   
+
+select -r pCube1 ;    
+    select -r pCube1.vtx[20] pCube1.vtx[27] ;
+    move -r 0.838574 0.188037 0 ;
+//Primary spike
+polyCylinder -r 1 -h 2 -sx 5 -sy 4 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+    select -r pCylinder1 ;
+    move -r 0 13.306496 0 ;
+    scale -r 0.324548 0.324548 0.324548 ;
+    scale -r 1 4.350665 1 ;
+    
+select -r pCylinder1.vtx[26] ;
+    move -r 0.0768641 1.045223 0 ;
+
+select -r pCylinder1.vtx[15:19] ;
+    move -r 0.196498 -0.0265543 0 ;
+
+select -r pCylinder1.vtx[5:9] ;
+    move -r -0.236692 -0.0497873 0 ;
+
+select -r pCylinder1.e[50:54] ;
+    polySoftEdge -a 0 -ch 1 pCylinder1.e[50:54];
+
+//Right Spike
+select -r pCylinder1 ;
+    duplicate -rr;
+    move -r -0.95583 -0.446868 0 ;
+    
+//Left Spike    
+select -r pCylinder2 ;
+    duplicate -rr;
+    move -r 2.018565 0 0 ;
+    rotate -r -os -fo 0 -131.843941 0 ;
+//Edit of Main spike
+select -r pCylinder1 ;
+    scale -r 1 1.509836 1 ;
+    rotate -r -os -fo 0 86.223373 0 ;
+    scale -r 1 1 0.778057 ;
+    select -cl  ;
+//Creation of a rock
+polyPlatonic -primitive 4 -subdivisionMode 0 -subdivisions 0 -radius 1 -sphericalInflation 1;
+    scale -r 1.951197 1.951197 1.951197 ;
+    select -r pPlatonic1.vtx[6] ;
+    move -r 2.02385 0 0 ;
+    select -r pPlatonic1.vtx[3] ;
+    move -r -1.994586 -1.39905 0 ;
+    select -r pPlatonic1.vtx[4] ;
+    move -r 0.30706 0 -2.171695 ;
+    select -d pPlatonic1.vtx[4] ;
+//Duplicating_rocks
+select -r pPlatonic1 ;
+    duplicate -rr;
+    move -r 4.629511 0 0 ;
+duplicate -rr;
+move -r -10.064975 0 0 ;
+   
+select -r pPlatonic1 ;
+    duplicate -rr;
+    move -r -5.203883 0.405613 0 ;
+    rotate -r -os -fo 0 -45.124114 0 ;
+    move -r 1.362266 0 0 ;
+
+select -r pPlatonic4 ;
+select -tgl pPlatonic2 ;
+select -tgl pPlatonic3 ;
+    duplicate -rr;
+
+    move -r -0.942253 0 4.178193 ;
+    scale -r 1.882088 1.882088 1.882088 ;
+    move -r 0 1.879819 0 ;
+    
+select -r pPlatonic6 ;
+    rotate -r -os -fo 0 0 -31.43465 ;
+    move -r 2.788861 -0.073009 0 ;
+    
+//Extrusions
+select -r pPlatonic5 ;
+    select -r pPlatonic5.f[9] ;
+    select -tgl pPlatonic5.f[4] ;
+    move -r 7.558029 0 2.025922 ;
+
+//Combine
+select -r pCube1 CrossGuard core pPlatonic7 pPlatonic6 pPlatonic5 pPlatonic3 pPlatonic4 pCylinder2 pCylinder3 pPlatonic1 pPlatonic2 pCylinder1 ;
+polyUnite -ch 1 -mergeUVSets 1 -centerPivot -name pCube1 pCube1 CrossGuard core pPlatonic7 pPlatonic6 pPlatonic5 pPlatonic3 pPlatonic4 pCylinder2 pCylinder3 pPlatonic1 pPlatonic2 pCylinder1;
+// Result: pCube2 polyUnite1 // 
+
+select -r pPlatonic7 ;
+select -r pPlatonic7 pPlatonic6 pPlatonic5 pPlatonic4 pPlatonic3 pPlatonic2 pPlatonic1 pCylinder3 pCylinder2 pCylinder1 pCube1 CrossGuard core ;
+//delete pPlatonic7 pPlatonic6 pPlatonic5 pPlatonic4 pPlatonic3 pPlatonic2 pPlatonic1 pCylinder3 pCylinder2 pCylinder1 pCube1 CrossGuard core ;
+
+
+select -r pCube2 ;
+    doGroup 0 1 1;
+    rename "group1" "Trident_geo_grp";
+
+select -r pCube2 ;
+rename "pCube2" "Trident_Geo";
+
+
+{
+
+int $radius = 1;
+string $obj[];
+string $objects[];
+
+$obj = `polySphere -radius $radius`; 
+move -absolute -worldSpace 0 ($radius*11.5) 0 $obj[0];
+$radius++;
+$objects[size($objects)] = $obj[0];
+}
+
+select -r pSphere1 ;
+    scale -r 0.618886 0.618886 0.618886 ;
+
+    move -r 0 -0.598605 0 ;
+    
+select -r Trident_Geo ;
+select -tgl pSphere1 ;
+polyUnite -ch 1 -mergeUVSets 1 -centerPivot -name pSphere1 pSphere1 Trident_Geo;
+
+select -r pSphere2 ;
+    doGroup 0 1 1;
+    rename "group1" "Geo_group";
+
+select -r pSphere2 ;
+rename "pSphere2" "Geo";
+
+select -r core CrossGuard pCube1 pCylinder1 pCylinder2 pCylinder3 pPlatonic1 pPlatonic2 pPlatonic3 pPlatonic4 pPlatonic5 pPlatonic6 pPlatonic7 Trident_geo_grp pSphere1 ;
+    doGroup 0 1 1; 
+    rename "HowDoIgetRidOfThis?";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+
+int $radius = 1;
+string $obj[];
+string $objects[];
+    
+$obj = `CreatePolygonPlatonic -radius $radius`; 
+move -absolute -worldSpace 0 ($radius*2) 0 $obj[0];
+$radius++;
+$objects[size($objects)] = $obj[0];
+print($objects);
+}
+
+select -r pPlatonic1.f[7] ;
+    polyExtrudeFacet -keepFacesTogether 1 -pivotX 0 -pivotY -0.5 -pivotZ 4 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 pPlatonic1.f[7:7];
+move -relative 0 1 0;
+     move -r -1.311722 -0.679934 0 ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
