@@ -1,0 +1,124 @@
+    {
+    
+    int $radius = 1;
+    string $obj[];
+    string $objects[];
+    
+    int $DerDer = 0;
+//Wall     
+    $obj = `polyCube -name "DingleWall"`; 
+    select -r DingleWall ;
+    scale -r 13.223241 1 1 ;
+    scale -r 1 5.191586 1 ;
+    move -r 0 4.00152 -8.711846 ;
+    move -r 0 -1.614063 0 ;
+    $radius++;
+    $objects[size($objects)] = $obj[0];
+    
+    select -r DingleWall ;
+        duplicate -rr;
+        move -r 0 0 15.476671 ;
+//Tower  
+    $obj = `polyCylinder -r 3 -h 6 -sx 12 -sy 3 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1  -name "DingleTower"`; 
+    move -r 0 0 0 ;
+    $radius++;
+    $objects[size($objects)] = $obj[0];
+    
+//Sun    
+    $obj = `CreatePolygonPlatonic -name "Floofalupper"`;
+    $radius++;
+    $objects[size($objects)] = $obj[0];
+    move -x (0 + $radius) -y 20 -z 0 $objects[1]; 
+   
+   
+   
+    //FORLOOPS BRUTHER
+   for($DerDer=0; $DerDer<8;)
+   {
+       $obj = `duplicate $objects[0]`;
+       move -x ($DerDer * 10) -y (2.387) -z (-8.712) $obj [0];
+       $objects[size($objects)] = $obj[0];
+       $DerDer++;
+       
+       
+   }
+   
+      for($DerDer=0; $DerDer<8;)
+   {
+       $obj = `duplicate $objects[1]`;
+       move -x ($DerDer * 10) -y (2.387) -z (-8.712) $obj [0];
+       $objects[size($objects)] = $obj[0];
+       $DerDer++;
+   
+   
+   
+   }
+   
+   select -r DingleWall5 DingleWall4 DingleWall3 DingleTower3 DingleTower2 DingleTower5 DingleTower4 DingleTower1 DingleWall9 DingleWall8 DingleWall7 DingleWall6 DingleTower8 DingleTower7 DingleTower6 DingleWall DingleWall2 ;
+       select -d DingleTower4 ;
+       select -d DingleTower5 ;
+       polyUnite -ch 1 -mergeUVSets 1 -centerPivot -name DingleWall5 DingleWall5 DingleWall4 DingleWall3 DingleTower3 DingleTower2 DingleTower1 DingleWall9 DingleWall8 DingleWall7 DingleWall6 DingleTower8 DingleTower7 DingleTower6 DingleWall DingleWall2;
+       duplicate -rr;
+       move -r 0 0 38.428806 ;
+       rotate -r -eu -fo 0 91.717697 0 ;
+       move -r -39.850632 0 3.48301 ;
+
+    select -r DingleWall11 ;
+       duplicate -rr;
+       move -r 82.842633 0 0 ;
+
+     select -r DingleWall12 ;
+       duplicate -rr;
+
+    select -r DingleWall13 ;
+        move -r -38.993794 0 40.924512 ;
+        rotate -r -eu -fo 0 87.492009 0 ;
+        move -r -0.735932 0 1.381644 ;
+        move -r 0 0 -0.879171 ;
+  
+    select -r DingleTower ;
+        move -r 37.107079 0 32.305839 ;
+        scale -r 1 5.21294 1 ;
+        select -r DingleTower ;
+        scale -r 1 1.563937 1 ;    
+
+select -r DingleWall1 ;
+  doDelete;
+
+//Make a flower
+select -r pPlatonic1 ;
+    move -r 43.211973 0 31.353439 ;
+    move -r 0 49.526371 0 ;  
+    scale -r 10.349021 10.349021 10.349021 ;
+    hilite pPlatonic1.f[2] pPlatonic1.f[4] pPlatonic1.f[10] pPlatonic1.f[12] pPlatonic1.f[16] ;
+    selectMode -component ;
+    select -r pPlatonic1.f[2] pPlatonic1.f[4] pPlatonic1.f[10] pPlatonic1.f[12] pPlatonic1.f[16] ;
+    polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 43.21197334 -pvy 49.52637136 -pvz 31.3534392 -divisions 1 -twist 0 -taper 1 -off 0 -thickness 0 -smoothingAngle 30 pPlatonic1.f[2] pPlatonic1.f[4] pPlatonic1.f[10] pPlatonic1.f[12] pPlatonic1.f[16]; 
+    scale -r -p 43.211977cm 49.526371cm 31.353438cm 3.938142 3.938142 3.938142 ;
+//Moving verts to make a stem
+
+    select -r DingleTower ;
+select -r DingleTower.vtx[24:35] ;
+move -r 14.158232 0 0 ;
+select -r DingleTower.vtx[12:23] ;
+move -r 16.655257 0 0 ;
+
+//combine all the things
+select -r DingleWall13 DingleWall12 DingleWall11 DingleTower5 DingleWall10 pPlatonic1 DingleTower DingleTower4 ;
+polyUnite -ch 1 -mergeUVSets 1 -centerPivot -name DingleWall13 DingleWall13 DingleWall12 DingleWall11 DingleTower5 DingleWall10 pPlatonic1 DingleTower DingleTower4;
+
+//select all groups and delete history
+select -r DingleWall DingleTower pPlatonic1 DingleWall2 DingleWall3 DingleWall4 DingleWall5 DingleWall6 DingleWall7 DingleWall8 DingleWall9 DingleTower1 DingleTower2 DingleTower3 DingleTower4 DingleTower5 DingleTower6 DingleTower7 DingleTower8 DingleWall10 DingleWall11 DingleWall12 DingleWall13 ;
+
+DeleteAllHistory;
+
+select -r DingleWall14 ;
+    rename "DingleWall14" "Flower_geo_stuff";
+
+select -r Flower_geo_stuff ;
+  doGroup 0 1 1;
+  rename "Dingle_geo";
+   
+}   
+   
+  
