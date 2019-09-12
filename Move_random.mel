@@ -1,0 +1,78 @@
+
+//with the beginning of the procedure, the various contents of () should be alkl of the variables. 
+proc  RandomMove(int $count, float $minX, float $maxX, float $minY, float $maxY, float $minZ, float $maxZ)
+{
+    string $currentSelection[] = `ls -sl`;    
+    for($iterator = 0; $iterator < $count; $iterator++)
+    {}
+    float $randX = `rand $minX $maxX`;
+    float $randY = `rand $minX $maxY`;
+    float $randZ = `rand $minX $maxZ`;
+    
+    
+    move -absolute ($randX) ($randY)($randZ); 
+   // use move -absolute to set the movement to be set within bounds by worldspace instead of -r which is relative
+   // to the position of the shape.  
+   
+   
+}
+
+//RandomMove runs after the procedure so that it takes the data that has been saved by proc and executes it into the scene.
+RandomMove(3, 1, 20, 1, 20, 1, 20);
+
+
+
+
+
+
+  
+    for($iterator = 0; $iterator < size($currentSelection); $iterator++)
+    {
+        float $randnum = `rand $minX $maxX`;
+        int $floorRand = `floor $randnum`;
+        float $tx = `getAttr ($currentSelection[$iterator] + ".tx")`;
+        
+        setAttr ($currentSelection[$iterator] + ".tx") ($tx + $floorRand);
+}
+}
+  
+        float $randnum = `rand 5 30`;
+        int $floorRand = `floor $randnum`;
+        float $ty = `getAttr ($currentSelection[$iterator] + ".ty")`;
+        
+        setAttr ($currentSelection[$iterator] + ".ty") ($tx + $floorRand);
+        
+        
+        float $randnum = `rand 5 30`;
+        int $floorRand = `floor $randnum`;
+        float $tz = `getAttr ($currentSelection[$iterator] + ".tz")`;
+        
+        setAttr ($currentSelection[$iterator] + ".tz") ($tx + $floorRand);
+  
+  
+    }
+    
+    
+    
+proc MaximumMove()
+{
+    string $c[] = `ls -sl`;
+    string MaximumX[];
+    string MaximumY[];
+    string MaximumZ[]; 
+
+ for($selectedObjects; 
+
+   
+   if ("tx" > MaximumX);
+       `getattr ($object $attr)`
+  setAttr ("tx" == MaximumX);
+}
+    
+    
+}
+    
+}
+
+
+       
