@@ -1,0 +1,42 @@
+proc renameFunction(string $names) //The procedure containes the string for name, which gets assigned to it as the string
+                               //function is called with 'renameFunction' at the end of the script
+{    
+	int $amounts;              //A simple int value titled amounts
+	string $sels[] = `ls -sl`; //the $sels[] array equals the amount of the selected objects in the scene. 
+	                           // because it needs to only run once. It is place outside of the forloop.
+	int $totalSelection = `size($sels)`;  //This in labeled gets the size of $sels. So, if I have 21 objects selected
+                               //in the $sels array, than size will read it as 21.
+	string $tokens[];  //A string array for tokens, when the tokenize command is executed. The first part of the token                       
+	tokenize $names "#" $tokens; //will go to token[0] and the second half, (after # symbol) will go to token[1]
+
+	$amounts = size($names) - size($tokens[0]) - size($tokens[1]); //the int amounts is equal to the size of names
+	                            //which is equal to the symbols in the name. minus, the size of token[0] and token[1]
+	                            //This makes it so subtracting it all will only leave me with the value of how many ##
+                                //that I have in the name.
+
+	for($objects = 0; $objects < $totalSelection; $objects++) //objects is getting the array of how many objects are selected
+	{                                                         //so it starts climbing from 1 instead of 0.
+		int $numDigits = size((string)($objects+1)); //Taking an int and turning it into a string. Which is how 0 is being
+		                                             //paased into the padding.
+		int $pad = ""; // the data is an empty string, unless information from the if statment is assigned into it.
+		
+		if ($numDigits < $amounts)  //if the number of digits is less than the $amounts the function is run, which will take the
+		{                           //pad amount, and make it equal to the amounts minus the number of digits. Which will give me
+		                            //the needed amount of ## symbols.
+			int $padAmount = $amounts - $numDigits; 
+			
+			for($i = 0; $i < $padAmount; $i++) //each time this loop is run, it'll add a "0" 
+			{
+				$pad = $pad + "0";  //this is the reassignment information that is passed into $pad "";
+			}                       //the information is then passed back to the $pad ""; and will give its padding.
+		}
+		
+		string $newName = $tokens[0] + $pad + ($objects + 1) + $tokens[1];  //The setup for the name. token 0 + the padding
+		                          //which will either be nothing. Or run through that loop until its digits are greater than the amount
+		                          // and then add $objects + 1. So we have the climbing numbers. for the second part of the counter. 
+		                          // then the second token will come last. Which will cause the new name to look like "Left_Chain_##_Geo"
+		rename $sels[$objects] $newName;  
+	}
+}
+
+renameFunction("Left_Chain_##_Geo");  //And finally, the execution of the procedure. And with that.... Good night America! 

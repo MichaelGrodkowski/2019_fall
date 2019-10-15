@@ -1,0 +1,125 @@
+//Addition
+proc float Add(float $num[])
+{
+  
+    float $total;
+    $total = $num[0];
+    
+    
+
+for( $i = 1; $i<size($num); $i++)
+    {$total = $total + $num[$i];}
+   
+//$total = $total/size($num);
+
+    return $total;
+}
+Add({2,5,21});
+
+//Subtraction
+proc float Sub(float $num[])
+{
+  
+    float $total;
+    $total = $num[0];
+    
+for( $i = 1; $i<size($num); $i++)
+    {$total = $total - $num[$i];}
+   
+    return $total;
+}
+Sub({2,5,21});
+
+//Multiplication
+proc float Mult(float $num[])
+{
+  
+    float $total;
+    $total = $num[0];
+    
+for( $i = 1; $i<size($num); $i++)
+    {$total = $total * $num[$i];}
+   
+    return $total;
+}
+Mult({2,5,21});
+
+//DIVISION
+proc float Divis(float $num[])
+{
+  
+    float $total;
+    $total = $num[0];
+    
+for( $i = 1; $i<size($num); $i++)
+    {$total = $total / $num[$i];}
+   
+    return $total;
+}
+Divis({2,5,21});
+
+
+//Mean
+proc float meanNum(float $num[])
+{
+    float $total;
+    $total = $num[0];
+    
+for( $i = 1; $i<size($num); $i++)
+    {$total = $total + $num[$i];}
+   
+    $total = $total/size($num);
+
+    return $total;
+}
+meanNum({2,5,21});
+
+//Median
+proc float medianNum(float $num[])
+{
+ float $numList[] = `sort $num`;
+ float $total;
+ $total = $num[0];
+    
+    
+    $total = ($numList[]) / 2; 
+ 
+ return $total;
+}
+medianNum({2,5,4,2,3,12,21});
+
+
+//Mode
+proc float modeNum (float $num[])
+{
+
+float $mostCommon;
+
+    for ($i = 1; $i <size($nums); $i++)
+    {
+        if ($nums[$i] == $nums)
+        {
+            $mostCommon++;
+           else
+           }
+           
+   
+
+return $mode;
+}
+modeNum({2,5,4,2,3,12,21});
+
+//Power 
+proc float squareNum(float $num[])
+{
+	$powered = `pow $num[1] $num[2]`;
+
+return $powered; 
+
+}
+squareNum({2,2,21});
+
+
+
+
+
