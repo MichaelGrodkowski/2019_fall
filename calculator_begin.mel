@@ -1,0 +1,218 @@
+//Addition 
+global proc float Add(float $num[])
+{
+
+    float $total;
+    $total = $num[0];
+    
+for( $i = 1; $i<size($num); $i++)
+    {$total = $total + $num[$i];}
+      
+
+    return $total;
+}
+//Subtraction
+global proc float Sub(float $num[])
+{
+
+    float $total;
+    $total = $num[0];
+
+for( $i = 1; $i<size($num); $i++)
+    {$total = $total - $num[$i];}
+
+    return $total;
+}
+//Sub({2,5,21});
+
+//Multiplication
+global proc float Mult(float $num[])
+{
+
+    float $total;
+    $total = $num[0];
+
+for( $i = 1; $i<size($num); $i++)
+    {$total = $total * $num[$i];}
+
+    return $total;
+}
+//Mult({2,5,21});
+
+//DIVISION
+global proc float Divis(float $num[])
+{
+
+    float $total;
+    $total = $num[0];
+
+for( $i = 1; $i<size($num); $i++)
+    {$total = $total / $num[$i];}
+
+    return $total;
+}
+//Divis({2,5,21});
+
+
+//Mean
+global proc float meanNum(float $num[])
+{
+    float $total;
+    $total = $num[0];
+
+for( $i = 1; $i<size($num); $i++)
+    {$total = $total + $num[$i];}
+
+    $total = $total/size($num);
+
+    return $total;
+}
+//meanNum({2,5,21});
+
+
+//Median
+global proc float Median(float $values[])
+    {
+        $values = `sort $values`;
+        print ("Values Sorted:" + "\n");
+        print $values; 
+        float $median; 
+
+        int $sortedValues = `size($values)`;
+        print ("Number of Values:" + "\n"); 
+        print ($sortedValues + "\n");
+
+        if($sortedValues % 2 != 0)
+            {
+                int $middleValue = ($sortedValues / 2);
+                $median = $values[$middleValue]; 
+
+                print ("Median:" + "\n" + $median);
+                return $median; 
+            }
+        if($sortedValues % 2 == 0)
+            {
+                int $middleValue = ($sortedValues / 2);
+                $median = ($values[$middleValue] + $values[$middleValue - 1]) / 2;
+
+                print ("Median:" + "\n" + $median);
+                return $median;
+            }
+
+        return 0; 
+    }
+
+{
+ //   Median({10,-1,50,25,-100,20});
+}
+
+//Power 
+global proc float squareNum(float $num[])
+{
+	$powered = `pow $num[1] $num[2]`;
+
+return $powered; 
+
+}
+//squareNum({2,2,21});
+
+
+proc float operationType (float $operations, float $listofNum[])
+{    
+    string $symbol;
+    string $sentence = "";
+    float $returnedTotal;
+    
+    
+    if ($operations == 0)
+     {     
+      $symbol = " + ";
+     
+     print ($listofNum);  
+     //  print (Add($listofNum));  
+    
+     $returnedTotal = (Add($listofNum));
+     
+       for($i=0; $i<size($listofNum); $i++)
+    	    if ($i < (size($listofNum) - 1))
+        	{
+	        	$sentence = $listofNum[0] + $symbol +  $listofNum[1] + $symbol + $listofNum[2] ;
+	        }
+            
+      // $sentence = $sentence + $listofNum[0];
+      $sentence = $sentence + " = " + $returnedTotal;
+    print $sentence;
+     }       
+     
+     else if ($operations == 1)
+     {     
+      $symbol = " - ";
+     
+     print ($listofNum);      
+     $returnedTotal = (Sub($listofNum));
+     
+       for($i=0; $i<size($listofNum); $i++)
+    	    if ($i < (size($listofNum) - 1))
+        	{
+	        	$sentence = $listofNum[0] + $symbol +  $listofNum[1] + $symbol + $listofNum[2] ;
+	        }
+	        
+	        
+	        $sentence = $sentence + " = " + $returnedTotal;
+    print $sentence;
+            
+         }
+     
+     else if ($operations == 2)
+     {     
+      $symbol = " * ";
+     
+     print ($listofNum);      
+     $returnedTotal = (Mult($listofNum));
+     
+       for($i=0; $i<size($listofNum); $i++)
+    	    if ($i < (size($listofNum) - 1))
+        	{
+	        	$sentence = $listofNum[0] + $symbol +  $listofNum[1] + $symbol + $listofNum[2] ;
+	        }
+	        
+            $sentence = $sentence + " = " + $returnedTotal;
+    print $sentence;
+         }
+     
+     else if ($operations == 3)
+     {     
+      $symbol = " / ";
+     
+     print ($listofNum);      
+     $returnedTotal = (Divis($listofNum));
+     
+       for($i=0; $i<size($listofNum); $i++)
+    	    if ($i < (size($listofNum) - 1))
+        	{
+	        	$sentence = $listofNum[0] + $symbol +  $listofNum[1] + $symbol + $listofNum[2] ;
+	        }
+	        
+            $sentence = $sentence + " = " + $returnedTotal;
+    print $sentence;
+         }
+     else if ($operations == 4)
+     {
+        print (meanNum($listofNum)); 
+        $returnedTotal = (meanNum($listofNum));   
+     }
+     else if ($operations == 5)
+     {
+         print (Median($listofNum));
+        $returnedTotal = (Median($listofNum));
+     }
+     
+     else if ($operations == 7)
+     {
+         print (squareNum($listofNum));
+        $returnedTotal = (squareNum($listofNum));
+  }
+    return $returnedTotal;
+}
+operationType(3,{5,21,76});
+     
