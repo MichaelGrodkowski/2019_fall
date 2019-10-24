@@ -1,0 +1,92 @@
+global proc Operation()
+{
+    string $sels[] = `ls -sl`;
+    float $oper = `size($sels)`;
+    print $oper;
+
+    if ($oper==1)
+    {
+        Singular;
+    } 
+    if($oper==3)
+    {
+        Multiple;
+    }
+}
+Operation()
+
+global proc Singular()
+{   
+ string $sels[] = `ls -sl`;
+ float $bb[];
+
+ for($i = 0; $i < size($sels); $i++ )
+    {
+      
+       if (size($sels)==1);
+       {
+             $bb = `xform -q -boundingBox`;
+                  float $rx;
+				  float $ry;
+				  float $rz;
+				  
+				  float $totalX;
+                  float $totalY;
+                  float $totalZ;   
+                  float $xMin = $bb[0];
+                  float $xMax = $bb[3];
+                  float $yMin = $bb[1];
+                  float $yMax = $bb[4];
+                  float $zMin = $bb[2];
+                  float $zMax = $bb[5];
+
+            $totalX = ($xMin + $xMax) / 2;    
+            $totalY = ($yMin + $yMax) / 2;
+            $totalZ = ($zMin + $zMax) / 2;
+			
+			spaceLocator -p $totalX $totalY $totalZ;
+		
+		} 	
+		}
+		}	
+Singular();
+		
+
+
+
+global proc Multiple()
+{
+      string $sels[] = `ls -sl`;
+ float $bb[]; 
+
+		if (size($sels)>1) 
+		{
+                 
+                 
+   string $dups[] = `duplicate $sels`;
+   $dups = `polyUnite $dups`;
+   delete -ch $dups;
+ 
+             $bb = `xform -q -boundingBox $dups[0]`;
+                 print ($bb);
+
+                  float $totalX;
+                  float $totalY;        
+                  float $totalZ;
+                  float $xMin = $bb[0];
+                  float $xMax = $bb[3];
+                  float $yMin = $bb[1];
+                  float $yMax = $bb[4];
+                  float $zMin = $bb[2];
+                  float $zMax = $bb[5];
+
+            $totalX = ($xMin + $xMax) / 2;
+            $totalY = ($yMin + $yMax) / 2;
+            $totalZ = ($zMin + $zMax) / 2;
+            spaceLocator -p $totalX $totalY $totalZ;
+
+			delete $dups[0];
+		}      
+	
+}	
+Multiple();
