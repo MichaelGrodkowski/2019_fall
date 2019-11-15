@@ -1,8 +1,5 @@
 import maya.cmds as cmds
 
-
-values = [5,3,1,7]
-
 #Addition
 
 def Add(values):  
@@ -27,9 +24,6 @@ Subtract(values)
 
 #Multiplication
 
-
-values = [5,3,1,7]
-
 def multiply(values):  
     total=values[0]
     for i in values[1:]:
@@ -39,11 +33,8 @@ def multiply(values):
 
 multiply(values)
 
-
-
 #Division
 
-values = [6,3]
 def Division(values):  
     total=values[0]
     for i in values[1:]:
@@ -61,7 +52,7 @@ def Power(values):
     
     print(pow)    
 
-Power([10,2,8])
+Power(values)
 
 #mean
 
@@ -72,7 +63,7 @@ def Mean(values):
     print("The Mean equals: " + str(total))
     return total 
 
-Mean([2,53,5,2])
+Mean(values)
 
 #median
 
@@ -82,7 +73,7 @@ def Median(values):
     median = (median1 + median2) / 2
     print("The median equals: " + str(median))
     return median
-Median([2,54,7,3,7,1,6,13,7])
+Median(values)
 
 #mode
 
@@ -90,32 +81,34 @@ def Mode(values):
     mode = max(values, key = values.count)
     print("The Mode equals: " + str(mode))
     return mode
-Mode([2,2,2,2,5,7,2,7,4,5,7,8,9,76,34,1,5])
+Mode(values)
     
 #operations
 
 def operationType(operations,values):
     if operations == 0:
-        Add()
+        Add((values))
 
     elif operations == 1:
-        Sub()
+        Subtract((values))
 
     elif operations == 2:
-        Mult()
+        multiply((values))
         
     elif operations == 3:
-        Divis()    
+        Division((values))    
     
     elif operations == 4:
-        Mean()
+        Mean((values))
         
     elif operations == 5:
-        Median()
-          
+        Median((values))
+    
     elif operations == 6:
-        Mode()
+        Mode((values))    
+          
+    elif operations == 7:
+        Mode((values))
     else:
-        Power()
-operationType(1[2,5,4])
-
+        Power((values))
+operationType(0,[2,2,5,4])
